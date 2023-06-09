@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
 import './App.scss';
+import List from './components/List';
+import Menu from './components/Menu';
 
 function App() {
   return (
     <div>
-      <Link to={'/list'}>list</Link>
+      <Menu />
+      <List />
     </div>
   );
 }

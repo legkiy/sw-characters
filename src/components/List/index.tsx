@@ -1,19 +1,34 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useGetList } from '../../hooks/useGetList';
+import { useSelector } from 'react-redux';
+import { IRootState } from '../../store/store';
+import './list.scss';
+import ListItem from './ListItem';
 
 interface IProps {}
 
 const List = ({}: IProps) => {
-  const [movieList, setMovieList] = useState();
-  const top250Movies = async () => {
-    const data = await fetch('https://akabab.github.io/starwars-api/api/all.json').then((res) =>
-      res.json()
-    );
-    console.log(data);
-  };
+  const { getList } = useGetList();
+
+  const { swList } = useSelector(
+    (state: IRootState) => state
+  );
+
   useEffect(() => {
-    top250Movies();
+    getList();
   }, []);
-  return <div></div>;
+  console.log(swList);
+
+  return (
+    <div className="list-conteiner">
+      {swList.map((item) => (
+        <ListItem
+          character={item}
+          key={item.id}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default List;
