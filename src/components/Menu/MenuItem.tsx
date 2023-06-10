@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-
 interface IProps {
   title: string;
   img?: string;
@@ -7,10 +6,18 @@ interface IProps {
   link: string;
 }
 
-const MenuItem = ({ title, img, onClick, link }: IProps) => {
+const MenuItem = ({
+  title,
+  img,
+  onClick,
+  link,
+}: IProps) => {
   return (
     <Link to={link}>
-      <div className="menu-item" onClick={onClick}>
+      <div
+        className="menu-item"
+        onClick={onClick}
+      >
         {title} {img}
       </div>
     </Link>

@@ -2,6 +2,7 @@ import { useGetList } from '../../hooks/useGetList';
 import MenuItem from './MenuItem';
 import './menu.scss';
 
+
 export interface IMenuItem {
   title: string;
   link: string;

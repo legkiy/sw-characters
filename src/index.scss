@@ -1,5 +1,6 @@
 :root {
   background-color: #242424;
+  height: 100%;
 }
 
 * {
@@ -13,10 +14,13 @@
 
 @font-face {
   font-family: StarJedi;
-  src: url('/public/starjedi_cyrillic.otf')
-    format('opentype');
+  src: url('/starjedi_cyrillic.otf') format('opentype');
 }
-
+body,
+html,
+#root {
+  height: 100%;
+}
 h1 {
   font-size: 25px;
 }

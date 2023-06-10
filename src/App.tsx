@@ -1,12 +1,16 @@
 import './App.scss';
-import List from './components/List';
+import List from './components/Pages/list';
 import Menu from './components/Menu';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Menu />
-      <List />
+      <Routes>
+        <Route path="/" element={<List />} />
+        <Route path="/favorites" />
+      </Routes>
     </div>
   );
 }

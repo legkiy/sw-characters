@@ -1,5 +1,6 @@
 import { ISwCharacter } from '../../store/swList/swListSlice';
 import { useState } from 'react';
+import './list-item.scss';
 
 interface IProps {
   character: ISwCharacter;
@@ -17,8 +18,7 @@ const ListItem = ({ character }: IProps) => {
     );
   };
 
-  const [isFavorite, setIsfavorite] =
-    useState(false);
+  const [isFavorite, setIsfavorite] = useState(false);
 
   return (
     <div className="list-item">
@@ -36,9 +36,7 @@ const ListItem = ({ character }: IProps) => {
 
       <div
         className={`fav-ico `}
-        onClick={() =>
-          setIsfavorite((prev) => !prev)
-        }
+        onClick={() => setIsfavorite((prev) => !prev)}
       >
         <svg
           width="73"
