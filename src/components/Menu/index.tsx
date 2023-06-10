@@ -2,7 +2,6 @@ import { useGetList } from '../../hooks/useGetList';
 import MenuItem from './MenuItem';
 import './menu.scss';
 
-
 export interface IMenuItem {
   title: string;
   link: string;
@@ -11,7 +10,7 @@ export interface IMenuItem {
 }
 
 const Menu = () => {
-  const { getList } = useGetList();
+  const { getList, getFavoList } = useGetList();
 
   const content: IMenuItem[] = [
     {
@@ -22,6 +21,7 @@ const Menu = () => {
     {
       title: 'Избранное',
       link: '/favorites',
+      onClick: () => getFavoList(),
     },
   ];
   return (

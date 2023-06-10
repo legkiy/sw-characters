@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useGetList } from '../../../hooks/useGetList';
 import { useSelector } from 'react-redux';
 import { IRootState } from '../../../store/store';
 import ListItem from '../../ListItem';
 
-interface IProps {}
+interface IProps {
+  onLoad: () => Promise<void>;
+  page: 'list' | 'favodites';
+}
 
-const List = ({}: IProps) => {
-  const { getList } = useGetList();
-
+const List = ({ onLoad, page }: IProps) => {
   const { swList } = useSelector((state: IRootState) => state);
+  console.log(swList);
 
   const countOnPage = 4;
 
@@ -21,13 +22,13 @@ const List = ({}: IProps) => {
   const currentItems = swList.slice(firstItemIndex, lastItemIndex);
 
   useEffect(() => {
-    getList();
+    onLoad();
   }, []);
 
   return (
     <div className="list-conteiner">
       {currentItems.map((item) => (
-        <ListItem character={item} key={item.id} />
+        <ListItem key={item.id} character={item} page={page} />
       ))}
     </div>
   );

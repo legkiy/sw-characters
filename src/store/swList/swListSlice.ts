@@ -1,35 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { ISwCharacter } from './interfaces';
 
-export interface ISwCharacter {
-  id: number;
-  name: string;
-  height: number;
-  mass: number;
-  gender: string;
-  homeworld: string;
-  wiki: string;
-  image: string;
-  born: number;
-  bornLocation: string;
-  died: number;
-  diedLocation: string;
-  species: string;
-  hairColor: string;
-  eyeColor: string;
-  skinColor: string;
-  cybernetics: string;
-  affiliations: string[];
-  masters: string[];
-  apprentices: string[];
-  formerAffiliations: [];
-}
-
-export interface ISWState {
+interface ISWState {
   swList: ISwCharacter[];
+  favoritesIds: number[];
 }
 
 const swState: ISWState = {
   swList: [],
+  favoritesIds: [],
 };
 
 export const swSlice = createSlice({
@@ -39,9 +18,12 @@ export const swSlice = createSlice({
     setSwList: (state, action) => {
       state.swList = action.payload;
     },
+    setFavoritesIds: (state, action) => {
+      state.favoritesIds = action.payload;
+    },
   },
 });
 
-export const { setSwList } = swSlice.actions;
+export const { setSwList, setFavoritesIds } = swSlice.actions;
 
 export default swSlice.reducer;

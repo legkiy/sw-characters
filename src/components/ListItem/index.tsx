@@ -1,12 +1,19 @@
-import { ISwCharacter } from '../../store/swList/swListSlice';
 import { useState } from 'react';
 import './list-item.scss';
+import { ISwCharacter } from '../../store/swList/interfaces';
+import { useDispatch, useSelector } from 'react-redux';
+import { IRootState } from '../../store/store';
+import { setFavoritesIds } from '../../store/swList/swListSlice';
 
 interface IProps {
   character: ISwCharacter;
+  page: 'list' | 'favodites';
 }
 
 const ListItem = ({ character }: IProps) => {
+  const { favoritesIds } = useSelector((state: IRootState) => state);
+  const dispatch = useDispatch();
+
   const bornDate = () => {
     const born = character.born;
     if (!born) return 'неизвестно';
@@ -19,6 +26,13 @@ const ListItem = ({ character }: IProps) => {
   };
 
   const [isFavorite, setIsfavorite] = useState(false);
+  const favoList: number[] = [];
+
+  const handleOnClickFavo = () => {
+    setIsfavorite((prev) => !prev);
+
+    dispatch(setFavoritesIds([...favoritesIds, character.id]));
+  };
 
   return (
     <div className="list-item">
@@ -34,10 +48,7 @@ const ListItem = ({ character }: IProps) => {
         />
       </div>
 
-      <div
-        className={`fav-ico `}
-        onClick={() => setIsfavorite((prev) => !prev)}
-      >
+      <div className={`fav-ico `} onClick={() => handleOnClickFavo()}>
         <svg
           width="73"
           height="66"
