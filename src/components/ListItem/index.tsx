@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './list-item.scss';
 import { ISwCharacter } from '../../store/swList/interfaces';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,21 +24,43 @@ const ListItem = ({ character }: IProps) => {
     );
   };
 
-  const [isFavorite, setIsfavorite] = useState(false);
-  const favoList: number[] = [];
+  const defineAdd = (id: number) => {
+    const index = favoritesIds.findIndex((el) => el > id);
+    if (index === -1) {
+      dispatch(setFavoritesIds([...favoritesIds, character.id]));
+      return;
+    } else {
+      const newFavoritesIds = favoritesIds
+        .slice(0, index)
+        .concat(id, favoritesIds.slice(index));
+      dispatch(setFavoritesIds(newFavoritesIds));
+      return;
+    }
+  };
 
   const handleOnClickFavo = () => {
-    setIsfavorite((prev) => !prev);
-
-    dispatch(setFavoritesIds([...favoritesIds, character.id]));
+    if (!!favoritesIds.find((el) => el === character.id)) {
+      const updateFavo = favoritesIds.filter((el) => el !== character.id);
+      dispatch(setFavoritesIds(updateFavo));
+      return;
+    }
+    defineAdd(character.id);
   };
+  console.log(character);
 
   return (
     <div className="list-item">
       <div className="character-desc">
         <h1>{character.name}</h1>
+        <p>Расса: {character?.species}</p>
         <p>Родился: {bornDate()}</p>
+        <p>Родная планета: {character.homeworld}</p>
+        {character?.masters?.length > 0 && (
+          <p>Учился у: {character?.masters}</p>
+        )}
+        <a href={character.wiki}>подробнее</a>
       </div>
+
       <div className="img-wrapper">
         <img
           className="character-img"
@@ -50,10 +71,14 @@ const ListItem = ({ character }: IProps) => {
 
       <div className={`fav-ico `} onClick={() => handleOnClickFavo()}>
         <svg
+          className={
+            favoritesIds.find((el) => el === character.id)
+              ? 'is-favorite'
+              : 'no-favorite'
+          }
           width="73"
           height="66"
           viewBox="0 0 73 66"
-          fill={isFavorite ? 'red' : 'none'}
           xmlns="http://www.w3.org/2000/svg"
         >
           <path

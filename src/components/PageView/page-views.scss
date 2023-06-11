@@ -1,0 +1,13 @@
+.page-view {
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  gap: 10px;
+  .curreent-page {
+    color: #fffb00;
+  }
+  span {
+    cursor: pointer;
+    color: #fffb008c;
+  }
+}

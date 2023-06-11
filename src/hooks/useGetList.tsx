@@ -5,7 +5,7 @@ import { ISwCharacter } from '../store/swList/interfaces';
 
 export const useGetList = () => {
   const dispatch = useDispatch();
-  const { favoritesIds, swList } = useSelector((state: IRootState) => state);
+  const { favoritesIds } = useSelector((state: IRootState) => state);
 
   const getList = async () => {
     const listRes = await fetch(
@@ -20,16 +20,19 @@ export const useGetList = () => {
 
     let list: ISwCharacter[] = [];
 
-    favoritesIds.forEach(async (element) => {
+    favoritesIds.forEach(async (el, index) => {
       const favoRes = await fetch(
-        `https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/id/${element}.json`
+        `https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/id/${el}.json`
       ).then((res) => res.json());
-      
+      setTimeout(() => {
+        list = [...list, favoRes];
+        if (index === favoritesIds.length - 1) {
+          console.log(list);
+        }
+      }, (index + 1) * 500);
       list = [...list, favoRes];
       dispatch(setSwList(list));
     });
-
-    console.log(swList);
   };
   return { getList, getFavoList };
 };

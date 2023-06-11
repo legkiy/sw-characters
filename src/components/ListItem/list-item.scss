@@ -1,23 +1,78 @@
 .list-item {
   display: flex;
-  background: #ffffff;
-  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.25);
-  padding: 5px;
-  border-radius: 10px;
+  background: #ffffff00;
+  padding: 5px 40px;
   gap: 10px;
-  height: 16vh;
+  height: 20%;
+  margin-bottom: 20px;
+  position: relative;
+  --b: rgb(255, 0, 0);
+  border: 2px solid var(--b);
+  background: linear-gradient(
+        45deg,
+        var(--b) 0 calc(var(--bottom-left, var(--all)) + 2px),
+        transparent 0
+      )
+      bottom left / 50% 50%,
+    linear-gradient(
+        -45deg,
+        var(--b) 0 calc(var(--bottom-right, var(--all)) + 2px),
+        transparent 0
+      )
+      bottom right/50% 50%,
+    linear-gradient(
+        135deg,
+        var(--b) 0 calc(var(--top-left, var(--all)) + 2px),
+        transparent 0
+      )
+      top left / 50% 50%,
+    linear-gradient(
+        -135deg,
+        var(--b) 0 calc(var(--top-right, var(--all)) + 2px),
+        transparent 0
+      )
+      top right / 50% 50%,
+    var(--img, rgba(255, 0, 0, 0));
+  background-origin: border-box;
+  background-repeat: no-repeat;
+  mask: linear-gradient(
+        45deg,
+        transparent 0 var(--bottom-left, var(--all)),
+        #fff 0
+      )
+      bottom left,
+    linear-gradient(
+        -45deg,
+        transparent 0 var(--bottom-right, var(--all)),
+        #fff 0
+      )
+      bottom right,
+    linear-gradient(135deg, transparent 0 var(--top-left, var(--all)), #fff 0)
+      top left,
+    linear-gradient(-135deg, transparent 0 var(--top-right, var(--all)), #fff 0)
+      top right;
+  mask-size: 50% 50%;
+  mask-repeat: no-repeat;
+  --all: 30px;
+
+  &:last-child {
+    margin-bottom: auto;
+  }
 
   .character-desc {
     width: 100%;
-    border: 1px solid black;
+    overflow-y: scroll;
     * {
       color: rgb(19, 89, 219);
+    }
+    a {
+      color: rgba(223, 26, 26, 0.856);
+      text-decoration: underline;
     }
   }
 
   .img-wrapper {
     height: 100%;
-
     width: 90px;
 
     .character-img {
@@ -30,7 +85,7 @@
   }
   .fav-ico {
     margin: auto;
-    height: 50px;
+    height: 70px;
     cursor: pointer;
     transition: all 0.15s;
 
@@ -38,7 +93,13 @@
       transform: scale(1.1);
     }
   }
-  .favorite {
-    background-color: red;
+  .is-favorite {
+    fill: rgb(0, 4, 255);
+  }
+  .no-favorite {
+    fill: rgba(0, 4, 255, 0.192);
+    &:hover {
+      fill: rgba(0, 4, 255, 0.527);
+    }
   }
 }

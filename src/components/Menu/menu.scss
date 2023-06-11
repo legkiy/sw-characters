@@ -10,10 +10,28 @@
   width: 60%;
 
   .menu-item {
-    border-radius: 12px;
-    padding: 15px 20px;
+    border-radius: 40px;
+    padding: 10px 20px;
     font-size: x-large;
     display: flex;
-    background-color: #d9d9d9;
+    background-color: #d9d9d900;
+
+    span {
+      color: #fffb00;
+    }
+  }
+
+  .on-page {
+    position: relative;
+
+    span {
+      text-shadow: blue 0px 0px 20px;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        box-shadow: 0 0 100px 20px blue;
+      }
+    }
   }
 }
